@@ -14,7 +14,8 @@
 // SCL A5
 // SDA A4
 #define OLED_RESET 0  // GPIO0
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+//Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+Adafruit_SSD1306 display;
 
 #define LOGO_HEIGHT   16
 #define LOGO_WIDTH    16
@@ -42,6 +43,7 @@ const unsigned char PROGMEM swatch [] = {
 };
 
 void setupClock(void) {
+  Adafruit_SSD1306 display(128, 32, &Wire, OLED_RESET);
   pinMode(button1, INPUT_PULLUP);
   pinMode(button2, INPUT_PULLUP);
   delay(1000);
@@ -61,6 +63,7 @@ void setupClock(void) {
 }
 
 void setupStopwatch()   {
+  Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
   pinMode(6, INPUT_PULLUP); //Switch
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 64x48)
   display.display();
