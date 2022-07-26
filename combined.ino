@@ -393,6 +393,7 @@ void loop() {
     stopWatchSetupRun = false;
   } else if(debounceButton(buttonState,10) == LOW && buttonState == HIGH) {
      buttonState = LOW;
+     currentState = 0;
   }
 
   if (currentState == 0) {
