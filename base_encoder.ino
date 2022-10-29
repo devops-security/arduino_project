@@ -14,6 +14,34 @@ const uint8_t DT = 3;
 int16_t inputDelta = 0;             // Counts up or down depending which way the encoder is turned
 bool printFlag = false;             // Flag to indicate that the value of inputDelta should be printed
 
+
+/*
+
+Put variables in the global scope. Scope determines where a variable is readable.
+If the variable is created in a function it IS ONLY READABLE IN THAT FUNCTION 
+
+examples
+
+feedtime
+
+
+
+*/
+
+
+
+
+
+
+/* 
+In the setup we 
+
+1. Set up pin modes
+2. Set up the serial
+3. Set up the LCD for its first message. (What is the very first thing you want  the user to see). 
+
+
+*/
 void setup() {
     Serial.begin(9600);
     pinMode(CLK, INPUT_PULLUP);
@@ -31,8 +59,37 @@ void setup() {
     
 }
 
+
+/*
+
+The loop needs to be fast. If encoder changes happen we need to be able to respond to them. If we are updating other things we
+might miss a change. 
+
+
+The loop will do several things
+
+1. Check for change in value of the encoder. IF this happens:
+   
+   a. Disply the variables on the screen (update the LCD) AS the user changes them 
+   b. Update the variables for the feeding time
+  
+2. Periodically update the value of the clock on the LCD. NOT EVERY CYCLE OF THE LOOP, maybe every 1 minute?
+
+3. If its feeding time, dispense the food by opening the gate. 
+
+4. Check for empty food hopper?
+
+5. Antyhing else?
+
+*/
+
+
+
+
+
 void loop() {
 
+    
     
     // every loop, read the encoder
     int encoderChangeValue = readEncoder();
@@ -40,11 +97,34 @@ void loop() {
     if ( encoderChangeValue != 0) {
       // modify your code here
       Serial.println("i have detected a change");
+        
+        
+        
     }
+    
+    updateClock();
+    
+    dispenseFood();
     
     printDelta();
     
 }
+
+/* This is where we update the clock on the screen, 
+   1. CHeck the current time on LCD and comare to RTC.
+      IF less than 60 seconds, do nothing
+*/     
+void updateClock() {
+}
+
+
+/*
+   1. DOes the set time match the RTC time?
+   2. Dispense food. 
+*/
+void dispenseFood() {
+}
+
 
 int readEncoder() {
     static uint8_t state = 0;
