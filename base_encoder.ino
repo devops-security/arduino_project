@@ -32,18 +32,7 @@ void setup() {
 }
 
 void loop() {
-    lcd.setCursor(0,0);
-    lcd.print("Release 1: ");
-    lcd.setCursor(11,0);
-    //lcd.print(counter);
-    lcd.setCursor(13,0);
-    lcd.print(":00");
-    lcd.setCursor(0,1);
-    lcd.print("Release 2: ");
-    lcd.setCursor(11,1);
-    //lcd.print(add12);
-    lcd.setCursor(13,1);
-    lcd.print(":00");
+
     
     
     readEncoder();
@@ -105,5 +94,17 @@ void printDelta() {
     if (printFlag) {
         printFlag = false;
         Serial.println(inputDelta);
+            lcd.setCursor(0,0);
+    lcd.print("Release 1: ");
+    lcd.setCursor(11,0);
+    //lcd.print(counter);
+    lcd.setCursor(13,0);
+    lcd.print(inputDelta);
+    lcd.setCursor(0,1);
+    lcd.print("Release 2: ");
+    lcd.setCursor(11,1);
+    //lcd.print(add12);
+    lcd.setCursor(13,1);
+    lcd.print(":00");
     }
 }
