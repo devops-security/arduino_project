@@ -135,7 +135,12 @@ currentStateCLK = digitalRead(CLK);
 
   // Call the function to get state of encoder
   int stateOfEncoder = readEncoder();
-  Serial.println(stateOfEncoder);
+  
+  // the printstate will be set IF there is a change
+  if (printState == true) {
+    Serial.println(stateOfEncoder);
+  }
+  
 
    
 }   // END OF LOOP
@@ -192,6 +197,7 @@ int readEncoder() {
             }
             break; 
     }
-    return state;
+
+    return inputDelta;
 }
 
