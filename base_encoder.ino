@@ -34,12 +34,19 @@ void setup() {
 void loop() {
 
     
+    // every loop, read the encoder
+    int encoderChangeValue = readEncoder();
+    // If the encoder retunrs a zero nothing changed
+    if ( encoderChangeValue != 0) {
+      // modify your code here
+      Serial.println("i have detected a change");
+    }
     
-    readEncoder();
     printDelta();
+    
 }
 
-void readEncoder() {
+int readEncoder() {
     static uint8_t state = 0;
     bool CLKstate = digitalRead(CLK);
     bool DTstate = digitalRead(DT);
@@ -88,6 +95,13 @@ void readEncoder() {
             }
             break; 
     }
+
+    if (printFlag) {
+      return inputDelta;  
+    } else {
+      return 0;
+    }
+    
 }
 
 void printDelta() {
