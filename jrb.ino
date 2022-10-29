@@ -30,8 +30,8 @@ void setup() {
   lcd.init();
   lcd.backlight();
   lcd.setCursor(3,0);
-  pinMode(CLK,INPUT);
-  pinMode(DT,INPUT);
+    pinMode(CLK, INPUT_PULLUP);
+    pinMode(DT, INPUT_PULLUP);
   pinMode(5,OUTPUT);
   pinMode(6,OUTPUT);
   pinMode(SW, INPUT_PULLUP);
