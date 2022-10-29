@@ -1,3 +1,12 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+#include <TimeLib.h>
+#include <DS1307RTC.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,20,4); 
+
 // Input pins to connect to the encoder
 const uint8_t CLK = 2;
 const uint8_t DT = 3;
@@ -9,9 +18,34 @@ void setup() {
     Serial.begin(9600);
     pinMode(CLK, INPUT_PULLUP);
     pinMode(DT, INPUT_PULLUP);
+    
+    
+    pinMode(5,OUTPUT);
+    pinMode(6,OUTPUT);
+    
+    lcd.init();
+    lcd.backlight();
+    lcd.setCursor(3,0);
+        
+    Serial.begin(9600);
+    
 }
 
 void loop() {
+    lcd.setCursor(0,0);
+    lcd.print("Release 1: ");
+    lcd.setCursor(11,0);
+    //lcd.print(counter);
+    lcd.setCursor(13,0);
+    lcd.print(":00");
+    lcd.setCursor(0,1);
+    lcd.print("Release 2: ");
+    lcd.setCursor(11,1);
+    //lcd.print(add12);
+    lcd.setCursor(13,1);
+    lcd.print(":00");
+    
+    
     readEncoder();
     printDelta();
 }
